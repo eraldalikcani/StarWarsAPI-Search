@@ -1,3 +1,89 @@
 .App {
   text-align: center;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #9eb0bf;
+  flex: 80%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+label {
+  display: block;
+  margin: 2rem 1.5rem;
+  padding-left: 1rem;
+  display: inline-block;
+  font-weight: 100;
+}
+
+label input {
+  margin-left: 10px;
+}
+
+input[type="text"], input[type="number"], button {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  margin-right: 3.5rem;
+}
+
+input[type="text"], input[type="number"] {
+  width: 15rem;
+  margin-right: 0.5rem;
+}
+
+button {
+  background-color: #191919;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #333;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-right: 30%;
+}
+
+li {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+li > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+li > div > p {
+  flex: 80%;
+}
+
+li > div > h3 {
+  flex-basis: 70%;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+}
+
+li > div > ul {
+  flex-basis: 50%;
+  margin-left: 1rem;
+}
+
+

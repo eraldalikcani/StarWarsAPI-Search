@@ -1,39 +1,41 @@
 import React, { useEffect, useState } from "react";
 import agent from "../api/agent";
 import { Person } from "../models/person";
+import './App.css';
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<Person[]>([]);
-  const [getPersonId, setGetPersonId] = useState(1);
-  const [getResults, setGetResults] = useState<Person | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // Initialize state variables
+  const [searchQuery, setSearchQuery] = useState(""); // stores the search query input by the user
+  const [searchResults, setSearchResults] = useState<Person[]>([]);// stores the search results returned by the API
+  const [getPersonId, setGetPersonId] = useState(1);// stores the person ID input by the user for get request
+  const [getResults, setGetResults] = useState<Person | null>(null);// stores the person object returned by the get request
+  const [error, setError] = useState<string | null>(null);// stores the error message returned by the API
 
+// Function to handle search by name
   const handleSearchbyName = async () => {
     setSearchResults([]);
     setGetResults(null);
     try {
-      const data = await agent.searchPersons(searchQuery);
+      const data = await agent.searchPersons(searchQuery);// call searchPersons API method with search query
       console.log(data);
-      setSearchResults(data);
-      setError(null);
+      setSearchResults(data);// update state with search results
+      setError(null);// reset error state
     } catch (error: any) {
       console.error(error);
-      setSearchResults([]);
     }
   };
 
+// Function to handle get person by ID
   const handleGetSubmit = async () => {
     setGetResults(null);
     setSearchResults([]);
     try {
-      const response = await agent.getPerson(getPersonId);
+      const response = await agent.getPerson(getPersonId);// call getPerson API method with person ID
       console.log(response);
-      setGetResults(response);
-      setError(null);
+      setGetResults(response);// update state with person object
+      setError(null);// reset error state
     } catch (error: any) {
-      setError(error.message);
-      setGetResults(null);
+      setError(error.message);// update error state with error message
     }
   };
 
@@ -59,13 +61,14 @@ function App() {
         <button onClick={handleGetSubmit}>Get</button>
       </label>
       <div>
+        <h2>Results</h2>
         {searchResults.length > 0 ? (
           <div>
-            <h2>Search Results</h2>
             <ul>
               {searchResults.map((person) => (
                 <li key={person.id}>
                   <div>
+                    <h3>Person</h3>
                     <p>Id: {person.id}</p>
                     <p>Name: {person.name}</p>
                     <p>Birth Year: {person.birth_year}</p>
@@ -90,14 +93,17 @@ function App() {
           </div>
         ) : (
           <div>
-            <h2>Get Results</h2>
             {error ? (
+              <>
               <div>{error}</div>
+              </>
             ) : (
+              <>
               <ul>
                 {getResults && (
                   <li key={getResults.id}>
                     <div>
+                      <h3>Person</h3>
                       <p>Id: {getResults.id}</p>
                       <p>Name: {getResults.name}</p>
                       <p>Birth Year: {getResults.birth_year}</p>
@@ -119,6 +125,7 @@ function App() {
                   </li>
                 )}
               </ul>
+              </>
             )}
           </div>
         )}
