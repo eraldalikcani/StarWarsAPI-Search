@@ -1,6 +1,5 @@
 # Star Wars API Search
 
-This project is divided in two parts(client-side and server-side)
 
 ## Commands
 
