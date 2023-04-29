@@ -3,12 +3,29 @@ import { Film, Person } from "../models/person";
 
 const SWAPI_BASE_URL = "https://swapi.dev/api/";
 
+const BACKEND_API_ENDPOINT = "http://localhost:5000/api/calls";
+
+export async function getApiCalls(call: string) {
+  // Send API call data to backend
+  try {
+    await axios.post(BACKEND_API_ENDPOINT, {
+      endpoint: call,
+    });
+    console.log("TEST");
+  } catch (error) {
+    console.error("Error sending API call data to backend:", error);
+  }
+  return call;
+}
+
 export async function searchPersons(query: string): Promise<Person[]> {
   const response = await axios.get(`${SWAPI_BASE_URL}people`, {
     params: {
       search: query,
     },
   });
+
+  getApiCalls(`/people?search=${query}`);
 
   const results = response.data.results;
 
@@ -36,6 +53,7 @@ export async function searchPersons(query: string): Promise<Person[]> {
 export async function getPerson(id: number): Promise<Person> {
   try {
     const response = await axios.get(`${SWAPI_BASE_URL}people/${id}/`);
+    getApiCalls(`/people/${id}/`);
     const result = response.data;
     const person: Person = {
       id: id,
@@ -73,6 +91,7 @@ const agent = {
   searchPersons,
   getPerson,
   getMovies,
+  getApiCalls,
 };
 
 export default agent;

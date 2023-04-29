@@ -10,11 +10,12 @@ function App() {
   const [error, setError] = useState<string | null>(null);
 
   const handleSearchbyName = async () => {
+    setSearchResults([]);
+    setGetResults(null);
     try {
       const data = await agent.searchPersons(searchQuery);
       console.log(data);
       setSearchResults(data);
-      setGetResults(null);
       setError(null);
     } catch (error: any) {
       console.error(error);
@@ -23,11 +24,12 @@ function App() {
   };
 
   const handleGetSubmit = async () => {
+    setGetResults(null);
+    setSearchResults([]);
     try {
       const response = await agent.getPerson(getPersonId);
       console.log(response);
       setGetResults(response);
-      setSearchResults([]);
       setError(null);
     } catch (error: any) {
       setError(error.message);
