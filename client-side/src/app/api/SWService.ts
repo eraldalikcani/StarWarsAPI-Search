@@ -7,13 +7,16 @@ const BACKEND_API_ENDPOINT = "http://localhost:5000/api/calls";
 
 async function getApiCalls(call: string) {
   // Send API call data to backend
-  axios.post(BACKEND_API_ENDPOINT, {
-    endpoint: call,
-  }).then(() => {
-    console.log("Successfully sent API call data to backend");
-  }).catch((error) => {
-    console.error("Error sending API call data to backend:", error);
-  });
+  axios
+    .post(BACKEND_API_ENDPOINT, {
+      endpoint: call,
+    })
+    .then(() => {
+      console.log("Successfully sent API call data to backend");
+    })
+    .catch((error) => {
+      console.error("Error sending API call data to backend:", error);
+    });
   return call;
 }
 
@@ -22,7 +25,7 @@ async function getApiCalls(call: string) {
  * @param {string} query - Query string to search for persons.
  * @returns {Promise<Person[]>} Array of person objects.
  */
-export async function searchPersons(query: string): Promise<Person[]> {
+async function searchPersons(query: string): Promise<Person[]> {
   // Send API call to Star Wars API to search for persons
   const response = await axios.get(`${SWAPI_BASE_URL}people`, {
     params: {
@@ -32,7 +35,7 @@ export async function searchPersons(query: string): Promise<Person[]> {
 
   // Send API call data to backend
   getApiCalls(`/people?search=${query}`);
-  
+
   // Extract results from API response
   const results = response.data.results;
 
@@ -68,17 +71,17 @@ export async function searchPersons(query: string): Promise<Person[]> {
  * @returns {Promise<Person>} A Promise that resolves with the Person object
  * @throws {Error} If the person is not found, or if there is an error with the API call
  */
-export async function getPerson(id: number): Promise<Person> {
+async function getPerson(id: number): Promise<Person> {
   try {
     // Make API request to retrieve person data by ID
     const response = await axios.get(`${SWAPI_BASE_URL}people/${id}/`);
-    
+
     // Log API call data to backend
     getApiCalls(`/people/${id}/`);
-    
+
     // Extract relevant data from response
     const result = response.data;
-    
+
     // Build Person object with extracted data
     const person: Person = {
       id: id,
@@ -89,16 +92,15 @@ export async function getPerson(id: number): Promise<Person> {
       weight: result.mass,
       films: result.films ? await getMovies(result.films) : [],
     };
-    
+
     // Return Person object
     return person;
-    
   } catch (error: any) {
     // If the error is a 404 (Person not found), throw a custom error message
     if (error.response && error.response.status === 404) {
       throw new Error(`Person not found`);
     }
-    
+
     // If the error is something else, re-throw it
     throw error;
   }
@@ -109,7 +111,7 @@ export async function getPerson(id: number): Promise<Person> {
  * @param films - An array of URLs representing the films to retrieve.
  * @returns An array of Film objects.
  */
-export async function getMovies(films: string[]): Promise<Film[]> {
+async function getMovies(films: string[]): Promise<Film[]> {
   // Create an array of promises to retrieve each film's data using axios.
   const moviePromises = films.map((url) =>
     axios.get(url).then((res) => res.data)
@@ -130,10 +132,10 @@ export async function getMovies(films: string[]): Promise<Film[]> {
   return movies;
 }
 
-const agent = {
+const swService = {
   searchPersons,
   getPerson,
   getMovies,
 };
 
-export default agent;
+export default swService;
