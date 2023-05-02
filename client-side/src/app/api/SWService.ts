@@ -127,7 +127,6 @@ async function getMovies(films: string[]): Promise<Film[]> {
     director: movie.director,
     release_date: movie.release_date,
   }));
-
   // Return array of Film objects
   return movies;
 }
@@ -136,6 +135,7 @@ const swService = {
   searchPersons,
   getPerson,
   getMovies,
+  getApiCalls,
 };
 
 export default swService;
