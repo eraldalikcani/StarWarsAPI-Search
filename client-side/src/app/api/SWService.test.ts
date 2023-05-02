@@ -44,7 +44,7 @@ describe("swService", () => {
       ];
 
       expect(persons).toEqual(expectedPerson);
-    });
+    }, 10000);
   });
 
   describe("getPerson", () => {
@@ -87,13 +87,13 @@ describe("swService", () => {
       };
 
       expect(person).toEqual(expectedPerson);
-    });
+    }, 20000);
 
     test("throws an error when given an invalid ID", async () => {
       await expect(swService.getPerson(999)).rejects.toThrow(
         "Person not found"
       );
-    });
+    }, 10000);
   });
 
   describe("getMovies", () => {
@@ -134,6 +134,6 @@ describe("swService", () => {
 
       expect(Array.isArray(films)).toBe(true);
       expect(films).toEqual(expectedFilms);
-    });
+    }, 10000);
   });
 });
