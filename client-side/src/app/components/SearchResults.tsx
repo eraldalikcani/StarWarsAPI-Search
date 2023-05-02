@@ -1,6 +1,8 @@
 import "./App.css";
 import { Person } from "../models/person";
 import PersonInfo from "./PersonInfo";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 
 interface Props {
   searchResults: Person[];
@@ -8,15 +10,13 @@ interface Props {
 
 function SearchResult({ searchResults }: Props) {
   return (
-    <>
-      <ul>
-        {searchResults.map((person: Person) => (
-          <li key={person.id}>
-            <PersonInfo person={person} />
-          </li>
-        ))}
-      </ul>
-    </>
+    <List>
+      {searchResults.map((person: Person) => (
+        <ListItem key={person.id} disablePadding>
+          <PersonInfo person={person} />
+        </ListItem>
+      ))}
+    </List>
   );
 }
 

@@ -65,23 +65,25 @@ function App() {
         setGetPersonId={setGetPersonId}
         handleGetSubmit={handleGetSubmit}
       />
-      <div>
-        <h2>Results</h2>
+      <>
+        <h1>Results</h1>
         {isLoading && <Loading />}
         {searchResults.length > 0 ? (
           <SearchResult searchResults={searchResults} />
         ) : (
-          <div>
+          <>
             {error ? (
-              <Error message={error} />
+              <label>
+                <Error message={error} />
+              </label>
             ) : (
               <>
                 <GetResult getResults={getResults} />
               </>
             )}
-          </div>
+          </>
         )}
-      </div>
+      </>
     </>
   );
 }

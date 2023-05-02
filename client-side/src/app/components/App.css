@@ -4,8 +4,10 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #9eb0bf;
-  flex: 80%;
+  background-image: url("https://images.hdqwalls.com/download/obi-wan-star-wars-maythefourthbewithyou-rp-2160x3840.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  color: azure;
 }
 
 h1 {
@@ -20,6 +22,7 @@ label {
   padding-left: 1rem;
   display: inline-block;
   font-weight: 100;
+  text-align: center;
 }
 
 label input {
@@ -34,6 +37,7 @@ button {
   border: none;
   border-radius: 0.5rem;
   margin-right: 3.5rem;
+  outline: none;
 }
 
 input[type="text"],
@@ -43,22 +47,16 @@ input[type="number"] {
 }
 
 button {
-  background-color: #191919;
-  color: #fff;
+  background-color: #f4efef;
+  color: #18544e;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   font-size: 1rem;
 }
 
 button:hover {
-  background-color: #333;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  padding-right: 30%;
+  background-color: #18544e;
+  color: #f4efef;
 }
 
 li {
@@ -67,24 +65,6 @@ li {
   border: 1px solid #ccc;
   border-radius: 0.5rem;
 }
-
-li > div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-li > div > p {
-  flex: 80%;
-}
-
-li > div > h3 {
-  flex-basis: 70%;
-  margin: 1rem 0;
-  font-size: 1.5rem;
-}
-
-li > div > ul {
-  flex-basis: 50%;
-  margin-left: 1rem;
+div {
+  flex: 70%;
 }

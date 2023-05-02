@@ -1,5 +1,8 @@
 import "./App.css";
 import { Film } from "../models/person";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 interface Props {
   film: Film;
@@ -7,12 +10,15 @@ interface Props {
 
 function MovieInfo({ film }: Props) {
   return (
-    <>
-      <p>Title: {film.title} </p>
-      <p>Episode: {film.episode_id}</p>
-      <p>Director: {film.director}</p>
-      <p>Release Date: {film.release_date}</p>
-    </>
+    <Typography variant="body2" color="azure">
+      Title: {film.title}
+      <br />
+      Episode: {film.episode_id}
+      <br />
+      Director: {film.director}
+      <br />
+      Release Date: {film.release_date}
+    </Typography>
   );
 }
 
